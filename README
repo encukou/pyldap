@@ -1,3 +1,11 @@
+** NOTE **
+
+This is an unofficial branch adding Python 3 support
+to python-ldap. It is now inactive.
+Development of Python 3 support continues in a forked
+project, pyldap: https://github.com/pyldap/pyldap
+
+
 ---------------------------------------
 python-ldap: LDAP client API for Python
 ---------------------------------------
