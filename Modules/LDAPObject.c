@@ -1,5 +1,5 @@
 /* See http://www.python-ldap.org/ for details.
- * $Id: LDAPObject.c,v 1.94 2016/01/26 11:01:08 stroeder Exp $ */
+ * $Id: LDAPObject.c,v 1.93 2016/01/18 12:33:07 stroeder Exp $ */
 
 #include "common.h"
 #include "patchlevel.h"
@@ -297,6 +297,7 @@ attrs_from_List( PyObject *attrlist, char***attrsp, PyObject** seq) {
             }
             bytes = PyUnicode_AsUTF8String(item);
             attrs[i] = PyBytes_AsString(bytes);
+            Py_DECREF(bytes);
         }
         attrs[len] = NULL;
     }
@@ -1185,7 +1186,6 @@ l_ldap_whoami_s( LDAPObject* self, PyObject* args )
     int ldaperror;
 
     if (!PyArg_ParseTuple( args, "|OO", &serverctrls, &clientctrls)) return NULL;
-    if (not_valid(self)) return NULL;
 
     if (!PyNone_Check(serverctrls)) {
         if (!LDAPControls_from_object(serverctrls, &server_ldcs))
